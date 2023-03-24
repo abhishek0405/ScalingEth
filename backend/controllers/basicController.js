@@ -40,7 +40,30 @@ const addUsedToken = async (req, res) => {
     status: "sucessfully added",
   });
 };
+
+const checkTokenIdUsed = async (req, res) => {
+  var tokenId = req.body.tokenId;
+  var user = req.body.user;
+  const tokenValidCount = parseInt(req.body.tokenValidCount);
+  var currUser = await Tokens.findOne({ owner: user });
+  const usedTokens = currUser.tokenIdsUsed;
+  var count = 0;
+  for (var token of usedTokens) {
+    console.log("checking");
+    console.log(token);
+    console.log(tokenId);
+    if (token === tokenId) {
+      count++;
+    }
+  }
+  const validFlag = count < tokenValidCount;
+  res.json({
+    isValid: validFlag,
+  });
+};
+
 module.exports = {
   getUsedTokens,
   addUsedToken,
+  checkTokenIdUsed,
 };

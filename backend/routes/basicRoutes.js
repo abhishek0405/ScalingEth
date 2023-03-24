@@ -10,3 +10,4 @@ const {
 
 router.get("/getUsedTokens", getUsedTokens);
 router.post("/addUsedToken", addUsedToken);
+router.post("/checkUsedToken", checkTokenIdUsed);
