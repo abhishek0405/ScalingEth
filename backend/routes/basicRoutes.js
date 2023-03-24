@@ -9,3 +9,4 @@ const {
 } = require("../controllers/basicController");
 
 router.get("/getUsedTokens", getUsedTokens);
+router.post("/addUsedToken", addUsedToken);
