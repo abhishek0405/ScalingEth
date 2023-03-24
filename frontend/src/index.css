@@ -1,13 +1,231 @@
-body {
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.dark-theme {
+  /* Set the background color to a dark shade */
+  background : linear-gradient(to bottom, #333, #000);
+  /* Change the text color to a light shade */
+  color: #fff;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark-theme body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #333, #000);
+  background-color: black;
+  color: #fff;
+}
+body {
+  background-image: url('./assets/landing-bg.png');
+  
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+
+  background-color: black;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.bg-black {
+  background-color: black;
+  color : white;
+}
+
+.foreboding-text {
+  font-size: 100px;  /* set the font size to 72 pixels */
+  text-align: center;  /* center the text within the div */
+  font-family: 'Bradley Hand ITC';
+  position: absolute;  /* position the div absolutely on the page */
+  top: 40%;  /* position the div 50% from the top of the page */
+  left: 50%;  /* position the div 50% from the left of the page */
+  transform: translate(-50%, -50%);  /* adjust the position of the div to center it on the page */
+}
+
+
+
+.wallet-button {
+  background-color: black;  /* set the background color of the button to white */
+  color: white;  /* set the text color to black */
+  border: none;  /* remove the border from the button */
+  padding: 15px 32px;  /* add some padding to the button */
+  text-align: center;  /* center the text within the button */
+  text-decoration: none;  /* remove the default text decoration from the button */
+  display: inline-block;  /* display the button as an inline block */
+  font-size: 16px;  /* set the font size to 16 pixels */
+  margin: 4px 2px;  /* add some margin to the button */
+  cursor: pointer;  /* change the cursor to a pointer when the button is hovered */
+  position: absolute;  /* position the button relatively on the page */
+  top: 50%;  /* position the button 50 pixels below the 'foreboding' text */
+  left: 43%;
+  transition: background-color 0.3s;  /* add a transition effect to the background color */
+}
+
+.wallet-button:hover {
+  background-color: gray;  /* change the background color to gray when the button is hovered */
+  color: white;
+}
+
+
+
+:root {
+  --black-gradient: linear-gradient(
+    144.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -78.47%,
+    #11101d 91.61%
+  );
+  --card-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+.text-gradient {
+  background: radial-gradient(
+    64.18% 64.18% at 71.16% 35.69%,
+    #def9fa -43.27%,
+    #acffa7 -21.24%,
+    #50fd5e 12.19%,
+    #39f633 29.82%,
+    #14f733 51.94%,
+    #26ff00 90.29%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
+
+.bg-blue-gradient {
+  background: linear-gradient(
+    157.81deg,
+    #def9fa -43.27%,
+    #acffa7 -21.24%,
+    #50fd5e 12.19%,
+    #39f633 29.82%,
+    #14f733 51.94%,
+    #26ff00 90.29%
+  );
+}
+
+.bg-green {
+  background: #2e9e1b
+}
+
+.bg-black-gradient {
+  background: linear-gradient(
+    144.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -78.47%,
+    #11101d 91.61%
+  );
+}
+
+.bg-black-gradient-2 {
+  background: linear-gradient(
+    -168.39deg,
+    #ffffff -278.56%,
+    #6d6d6d -78.47%,
+    #11101d 91.61%
+  );
+}
+
+.bg-gray-gradient {
+  background: linear-gradient(
+    153.47deg,
+    rgba(255, 255, 255, 0) -341.94%,
+    #14101d 95.11%
+  );
+}
+
+.bg-discount-gradient {
+  background: linear-gradient(125.17deg, #272727 0%, #11101d 100%);
+}
+
+.box-shadow {
+  box-shadow: 0px 20px 100px -10px rgba(66, 71, 91, 0.1);
+}
+
+.sidebar {
+  -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.feature-card:hover {
+  background: var(--black-gradient);
+  box-shadow: var(--card-shadow);
+}
+
+.feedback-container .feedback-card:last-child {
+  margin-right: 0px;
+}
+
+.feedback-card {
+  background: var(--black-gradient);
+}
+
+.feedback-card:hover {
+  background: var(--black-gradient);
+  cursor: pointer;
+}
+
+.blue__gradient {
+  background: linear-gradient(180deg, rgba(188, 165, 255, 0) 0%, #214d76 100%);
+  filter: blur(123px);
+}
+
+.pink__gradient {
+  background: linear-gradient(90deg, #f4c4f3 0%, #fc67fa 100%);
+  filter: blur(900px);
+}
+
+.white__gradient {
+  background: rgba(255, 255, 255, 0.6);
+  filter: blur(750px);
+}
+
+
+
+a {
+  color: #ffffff;
+  font-family: 'Bradley Hand ITC', cursive;
+  font-weight: bold;
+  font-size: 20px;
 }
