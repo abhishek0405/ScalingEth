@@ -48,6 +48,14 @@ const checkTokenIdUsed = async (req, res) => {
   var currUser = await Tokens.findOne({ owner: user });
   const usedTokens = currUser.tokenIdsUsed;
   var count = 0;
+  var newDoc = {}
+  if (currUser === null) {
+    newDoc.owner = user;
+    newDoc.tokenIdsUsed = [];
+    var DocEntity = new Tokens(newDoc);
+    DocEntity.save();
+  } else {
+    const usedTokens = currUser.tokenIdsUsed;
   for (var token of usedTokens) {
     console.log("checking");
     console.log(token);
