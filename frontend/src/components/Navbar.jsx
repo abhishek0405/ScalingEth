@@ -6,46 +6,35 @@ import Web3 from 'web3'
 
 const Navbar =  () => {
   const [active, setActive] = useState("Home");
+  const [toggle, setToggle] = useState(false);
   const [walletAddress, setWalletAddress] = useState("Get Started");
-  
+  const [advertiserStatus, setAdvertiserStatus] = useState('')
+  const [publisherStatus, setPublisherStatus] = useState('')
+  const [accounts, setAccounts] = useState([]);
+  const [web3, setWeb3] = useState(null);
+    
 
-
-  
-
-const APP_NAME = 'My Awesome App'
-const APP_LOGO_URL = 'https://example.com/logo.png'
-const DEFAULT_ETH_JSONRPC_URL = `https://${process.env.NODE_USERNAME}:${process.env.NODE_PASSWORD}@mainnet.ethereum.coinbasecloud.net`
-const DEFAULT_CHAIN_ID = 1
-
-// Initialize Coinbase Wallet SDK
-const coinbaseWallet = new CoinbaseWalletSDK({
-  appName: APP_NAME,
-  appLogoUrl: APP_LOGO_URL,
-  darkMode: false
-})
-
-// Initialize a Web3 Provider object
-const ethereum = coinbaseWallet.makeWeb3Provider(DEFAULT_ETH_JSONRPC_URL, DEFAULT_CHAIN_ID)
-
-// Initialize a Web3 object
-const web3 = new Web3(ethereum)
-  
 
   useEffect(() => {
-    ethereum.request({ method: 'eth_requestAccounts' }).then(response => {
-        const accounts = response;
-        console.log(`User's address is ${accounts[0]}`)
-        setWalletAddress(accounts[0])
-      
-        // Optionally, have the default account set for web3.js
-        web3.eth.defaultAccount = accounts[0]
-      })
-      
-      // Alternatively, you can use ethereum.enable()
-      ethereum.enable().then((accounts) => {
-        console.log(`User's address is ${accounts[0]}`)
-        web3.eth.defaultAccount = accounts[0]
-      })
+    async function handleConnect(){
+      if (window.ethereum) {
+        try {
+          // Request account access if needed
+          //await window.ethereum.request({ method: 'eth_requestAccounts' });
+          
+          const web3Instance = new Web3(window.ethereum);
+          setWeb3(web3Instance);
+
+          // Get accounts
+          const accounts = await web3Instance.eth.getAccounts();
+          setAccounts(accounts);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+    }
+    handleConnect()
     
   }, []);
   
@@ -107,7 +96,7 @@ const web3 = new Web3(ethereum)
             } mr-10`}
             onClick={() => setActive("Get Started")}
           >
-            <a href={`#${"getStarted"}`}>{walletAddress}</a>
+            <a href={`#${"getStarted"}`}>{accounts[0]}</a>
           </li>
             
       </ul>
