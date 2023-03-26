@@ -12,7 +12,9 @@ import DangerBag from './DangerBag';
 import InventoryBag from './InventoryCardBag';
 import Chat from "./Chat";
 import SocketContext from "./SocketContext";
-import NFTABI from '../contracts/NFTABI.json'
+//import NFTABI from '../contracts/NFTABI.json'
+import BadgeABI from '../contracts/BadgeABI.json'
+import Web3 from 'web3';
 import {ethers} from "ethers"
 import "../components/PresentRoomStyles.css"
 import {Web3Storage} from 'web3.storage'
@@ -198,9 +200,18 @@ function DangerRoom () {
 
     
     await provider.send("eth_requestAccounts", []);
+
+    const web3Instance = new Web3(window.ethereum);
+    const chainId = await web3Instance.eth.getChainId();
+
+    console.log(chainId)
+
+    if (chainId === 5001) { 
   const signer = await provider.getSigner();
 
-  const contract = new ethers.Contract('0xABC3c9cC5A0B019fb42cd00e62693446D92FaEC8', NFTABI, signer);
+  //const contract = new ethers.Contract('0xABC3c9cC5A0B019fb42cd00e62693446D92FaEC8', NFTABI, signer);
+  const contract = new ethers.Contract('0x20000e2C3088BA7b2D1F826344e2d607C054f0BF', BadgeABI, signer);
+  console.log("contract",contract);
 
 
     const tx1 = await contract.getAll(accounts[0]);
@@ -240,6 +251,9 @@ function DangerRoom () {
     
 
       setOneIsOpen(true);
+  }else{
+    alert('switch to mantle net')
+  }
   }
   function afterOpenModalOne() {
       // references are now sync'd and can be accessed.

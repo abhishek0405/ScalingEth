@@ -1,11 +1,13 @@
 import {React, useState, useEffect } from 'react';
-import forebodingABI from "../contracts/ForebodingABI.json"
+//import forebodingABI from "../contracts/ForebodingABI.json"
+import mantleABI from '../contracts/MantleMarketplace.json'
 import {ethers} from "ethers"
 import SellCard from './SellCard'
 
 import {Web3Storage} from 'web3.storage'
 import Modal from 'react-modal';
 import axios from 'axios';
+import Web3 from 'web3';
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 
 
@@ -144,42 +146,59 @@ const InventoryBagPresent = (props) => {
         const finalData = []
         await provider.send("eth_requestAccounts", []);
         var signer = await provider.getSigner();
-        const contract = new ethers.Contract('0x9eeF83ebA708c760b9D8f761835a47B9ff200722', forebodingABI, signer);
+        //const contract = new ethers.Contract('0x9eeF83ebA708c760b9D8f761835a47B9ff200722', forebodingABI, signer);
 
         const accounts =await window.ethereum.request({
             method: "eth_requestAccounts",
           });
           setAcc(accounts[0])
           console.log(accounts[0])
-         
-        const currTokens = await contract._tokenIds();
+
+
+          const web3Instance = new Web3(window.ethereum);
+            const chainId = await web3Instance.eth.getChainId();
         
-        for(var i = 0; i < parseInt(currTokens._hex, 16); i++){
+            console.log(chainId)
 
+            if (chainId === 5001) { 
 
-                var own = await contract._tokenOwner(i)
+                var signer = await provider.getSigner();
+                const contract = new ethers.Contract('0x22Cc03FaD19a7104841CE24E99F76fe769AEb016', mantleABI, signer);
+                console.log("contract",contract);
+         
+                const currTokens = await contract._tokenIds();
                 
-                if(check(accounts[0], own)){
-                    
-                    var forSale = await contract._marketPlace(i)
-                    console.log('for sale: ', forSale)
-                    if(parseInt(forSale._hex,16) === 0){
-                        var currData = await contract.tokenURI(i);
-               
-                        console.log(currData)
-                        var response = await fetch(currData);
-                        if(!response.ok)
-                            throw new Error(response.statusText);
-                           
-                        var json = await response.json();
+                for(var i = 0; i < parseInt(currTokens._hex, 16); i++){
+
+
+                        var own = await contract._tokenOwner(i)
                         
-                        Object.assign(json, {key : i})
-                        Object.assign(json, {tokenId : i})
+                        if(check(accounts[0], own)){
+                            
+                            var forSale = await contract._marketPlace(i)
+                            console.log('for sale: ', forSale)
+                            if(parseInt(forSale._hex,16) === 0){
+                                var currData = await contract.tokenURI(i);
+                    
+                                console.log(currData)
+                                var response = await fetch(currData);
+                                if(!response.ok)
+                                    throw new Error(response.statusText);
+                                
+                                var json = await response.json();
+                                
+                                Object.assign(json, {key : i})
+                                Object.assign(json, {tokenId : i})
 
-                        data.push(json)
-                       
+                                data.push(json)
+                            
 
-                    }
+                            }
+
+
+                        }else{
+                            alert('switch to mantle testnet');
+                        }
                 }
 
             
