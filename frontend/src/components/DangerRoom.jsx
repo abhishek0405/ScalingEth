@@ -252,7 +252,7 @@ function DangerRoom () {
 
       setOneIsOpen(true);
   }else{
-    alert('switch to mantle net')
+    // alert('switch to mantle net')
   }
   }
   function afterOpenModalOne() {

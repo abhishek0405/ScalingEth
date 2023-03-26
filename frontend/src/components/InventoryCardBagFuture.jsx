@@ -152,7 +152,6 @@ const InventoryBagFuture = (props) => {
 
         if (chainId === 5001) { 
         var signer = await provider.getSigner();
-        //const contract = new ethers.Contract('0x9eeF83ebA708c760b9D8f761835a47B9ff200722', forebodingABI, signer);
         const contract = new ethers.Contract('0x22Cc03FaD19a7104841CE24E99F76fe769AEb016', mantleABI, signer);
         console.log("contract",contract);
         const accounts =await window.ethereum.request({

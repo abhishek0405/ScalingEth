@@ -179,7 +179,7 @@ const InventoryBag = (props) => {
             }
         )
         } else{
-            alert('switch to mantle net on metamask')
+            // alert('switch to mantle net on metamask')
         }
         
 

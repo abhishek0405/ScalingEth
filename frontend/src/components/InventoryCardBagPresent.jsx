@@ -1,13 +1,12 @@
 import {React, useState, useEffect } from 'react';
-//import forebodingABI from "../contracts/ForebodingABI.json"
 import mantleABI from '../contracts/MantleMarketplace.json'
-import {ethers} from "ethers"
 import SellCard from './SellCard'
 
 import {Web3Storage} from 'web3.storage'
 import Modal from 'react-modal';
 import axios from 'axios';
 import Web3 from 'web3';
+import {ethers} from "ethers"
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 
 

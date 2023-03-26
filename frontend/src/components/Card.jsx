@@ -36,7 +36,7 @@ const Card = ({ title, description, imageUrl, price, tokenId }) => {
       console.log(a)
     }
     else{
-      alert('switch to mantle')
+      // alert('switch to mantle')
     }
 
   }
